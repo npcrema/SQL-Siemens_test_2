@@ -1,0 +1,23 @@
+import sqlite3
+ 
+# connecting to the database
+connection = sqlite3.connect("exercise_6.db")
+ 
+# cursor
+cursor = connection.cursor()
+ 
+# Create tables in the dataframe (students and values)
+cursor.execute("""CREATE TABLE students(id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, value INTEGER NOT NULL);""");
+cursor.execute("""CREATE TABLE grade(id INTEGER NOT NULL, max_value INTEGER NOT NULL, min_value INTEGER NOT NULL);""");
+cursor.execute("""CREATE TABLE output(id INTEGER NOT NULL, name2 VARCHAR(50) NOT NULL, value INTEGER);""");
+connection.commit();
+ 
+#condition with select
+SELECT * CASE(
+    wHEN (grade.min_value < 8 THEN 'NULL' ELSE students.name as END, 
+    grade.value, students.value FROM students, grade 
+    WHERE students.value >= grade.min_value AND students.value <= grade.max_value 
+    ORDER BY grade.grade DESC, students.name ASC;)
+
+# close the connection
+connection.close()
