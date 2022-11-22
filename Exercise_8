@@ -1,0 +1,29 @@
+import sqlite3
+ 
+# connecting to the database
+connection = sqlite3.connect("exercise_8.db")
+ 
+# cursor
+cursor = connection.cursor()
+ 
+# Create tables in the dataframe (dogs and cats)
+cursor.execute("""CREATE TABLE cats(id INTEGER NOT NULL PRIMARY KEY, name VARCHAR(50) NOT NULL);""");
+cursor.execute("""CREATE TABLE dogs(id INTEGER NOT NULL PRIMARY KEY, name VARCHAR(50) NOT NULL);""");
+
+#iNSERT
+cursor.execute("""INSERT or REPLACE  INTO dogs(id, name) VALUES('1', 'Fifi');""");
+cursor.execute("""INSERT or REPLACE  INTO dogs(id, name) VALUES('2', 'Fafa');""");
+cursor.execute("""INSERT or REPLACE INTO cats(id, name) VALUES('1', 'Milk');""");
+cursor.execute("""INSERT or REPLACE INTO cats(id, name) VALUES('2', 'Mimi');""");
+
+#confirmation of insertion
+connection.commit();
+
+cursor.execute("SELECT * FROM cats");
+cursor.execute("SELECT * FROM dogs");
+results = cursor.fetchall();
+print(results);
+
+
+# close the connection
+connection.close()
